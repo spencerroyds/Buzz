@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
+        //do u wanna eat mi butt
         ///////////////////////
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("962476874449-hubsifpma4pa1m6gknkmubqtb2v9gkoj.apps.googleusercontent.com")
