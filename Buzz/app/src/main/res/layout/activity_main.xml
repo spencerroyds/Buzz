@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.spencerroyds.buzz.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:map="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            tools:context="com.example.spencerroyds.buzz.MapsActivity" />
+
+        <ListView
+            android:id="@+id/nearbyView"
+            style="@style/ListFont"
+            android:layout_width="match_parent"
+            android:layout_height="205dp"
+            android:layout_gravity="bottom"
+            android:background="@color/popup"
+            android:visibility="invisible"
+            android:descendantFocusability="blocksDescendants"/>
+
+        <ImageButton
+            android:id="@+id/btnFindNearMe"
+            android:layout_width="47dp"
+            android:layout_height="50dp"
+            android:alpha=".60"
+            android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+            android:foregroundTint="@color/common_google_signin_btn_text_dark_focused"
+            android:tint="@color/place_autocomplete_search_text"
+            android:translationX="7dp"
+            android:translationY="7dp"
+            app:srcCompat="@drawable/places_ic_search"
+            android:focusable="false"/>
+
+    </FrameLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#363636"
+        app:itemIconTint="#bbbbbb"
+        app:itemTextColor="#bbbbbb"
+        app:menu="@menu/navigation" />
+
+</LinearLayout>

@@ -1,0 +1,142 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/custom_background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="1"
+    tools:context="com.example.spencerroyds.buzz.LoginActivity">
+
+    <!-- Login progress -->
+
+    <android.widget.RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="true"
+        android:translationY="0dp"
+        tools:context="com.example.spencerroyds.buzz.LoginActivity"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+    </android.widget.RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/txtPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_above="@+id/loginBTN"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="27dp"
+        android:alpha="10"
+        android:background="@drawable/edit_text"
+        android:backgroundTint="@android:color/background_light"
+        android:ems="10"
+        android:hint="  Password"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:textColor="@android:color/background_light"
+        android:textColorLink="@android:color/black"
+        android:translationY="-20dp" />
+
+    <Button
+        android:id="@+id/loginBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_above="@+id/textView4"
+        android:layout_alignStart="@+id/txtPwd"
+        android:layout_marginBottom="43dp"
+        android:background="@drawable/custom_button"
+        android:elevation="20dp"
+        android:fontFamily="sans-serif"
+        android:onClick="btnUserLogin_Click"
+        android:shadowRadius="0"
+        android:text="Login"
+        android:textColor="@android:color/background_light" />
+
+    <Button
+        android:id="@+id/registerBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignEnd="@+id/txtPwd"
+        android:layout_below="@+id/txtPwd"
+        android:background="@drawable/custom_button"
+        android:elevation="20dp"
+        android:fontFamily="sans-serif"
+        android:onClick="btnRegistrationUser_Click"
+        android:text="Register"
+        android:textColor="@android:color/background_light" />
+
+    <EditText
+        android:id="@+id/txtEmailLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_above="@+id/txtPwd"
+        android:layout_alignStart="@+id/txtPwd"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/edit_text"
+        android:backgroundTint="@android:color/background_light"
+        android:elegantTextHeight="false"
+        android:elevation="0dp"
+        android:ems="10"
+        android:focusedByDefault="true"
+        android:fontFamily="sans-serif"
+        android:hint="  Email"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
+        android:textAlignment="viewStart"
+        android:textColorLink="@android:color/black"
+        android:textSize="18sp"
+        android:translationY="-20dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/googleSignInButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="or"
+        android:textColor="@android:color/background_light"
+        android:translationY="-10dp" />
+
+    <Button
+        android:id="@+id/googleSignInButton"
+        android:layout_width="250dp"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp"
+        android:height="20dp"
+        android:background="@drawable/custom_button"
+        android:backgroundTint="@android:color/white"
+        android:drawableLeft="@drawable/googleg_standard_color_18"
+        android:paddingLeft="10dp"
+        android:paddingRight="25dp"
+        android:text="Sign In"
+        android:textAlignment="center"
+        android:translationY="0dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_above="@+id/txtEmailLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        app:srcCompat="@drawable/web_hi_res_512_no_back" />
+
+</RelativeLayout>

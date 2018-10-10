@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="350dp"
+    android:layout_height="365dp"
+    android:background="@drawable/popup_background"
+    android:layout_gravity="center"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/popUpClose"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:text="X"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_gravity="end"
+        android:gravity="center"
+        android:background="@drawable/close_button_background"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/dark_map"
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/darkmap"/>
+
+        <ImageView
+            android:id="@+id/silver_map"
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:cropToPadding="true"
+            android:src="@drawable/silvermap"
+            android:paddingLeft="5dp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp">
+
+        <ImageView
+            android:id="@+id/standard_map"
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/standardmap" />
+
+        <ImageView
+            android:id="@+id/night_map"
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:cropToPadding="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/nightmap"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp">
+
+        <ImageView
+            android:id="@+id/aubergine_map"
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/auberginemap" />
+
+        <ImageView
+            android:id="@+id/retro_map"
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:cropToPadding="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/retromap"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

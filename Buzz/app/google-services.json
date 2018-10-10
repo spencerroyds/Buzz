@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "962476874449",
+    "firebase_url": "https://buzzproj-6d664.firebaseio.com",
+    "project_id": "buzzproj-6d664",
+    "storage_bucket": "buzzproj-6d664.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962476874449:android:fce1e473d6314134",
+        "android_client_info": {
+          "package_name": "com.example.spencerroyds.buzz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "962476874449-43j2vf3jn9jcf5deof2poeaaliaciglh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.spencerroyds.buzz",
+            "certificate_hash": "79f0dc087778847cf91dadd3ff78e94cc7101266"
+          }
+        },
+        {
+          "client_id": "962476874449-hubsifpma4pa1m6gknkmubqtb2v9gkoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHQpTrn_FQz0r8zh3pp39cxxvmM5Lsqmk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "962476874449-hubsifpma4pa1m6gknkmubqtb2v9gkoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
