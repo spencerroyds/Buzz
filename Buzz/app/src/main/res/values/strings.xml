@@ -23,6 +23,11 @@
 
     <!-- Strings related to Settings -->
 
+    <!-- Facebook Strings -->
+    <string name="facebook_app_id">302510430542831</string>
+    <string name="fb_login_protocol_scheme">fb302510430542831</string>
+
+
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
 

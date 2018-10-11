@@ -13,16 +13,31 @@
     android:weightSum="1"
     tools:context="com.example.spencerroyds.buzz.LoginActivity">
 
+    <!--
+    <VideoView
+        android:id="@+id/bgVideoView"
+        android:layout_width="368dp"
+        android:layout_height="560dp"
+
+        android:layout_marginStart="0dp"
+
+
+        android:layout_marginTop="0dp" />
+        -->
+
     <!-- Login progress -->
 
     <android.widget.RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="0dp"
         android:clipToPadding="true"
         android:translationY="0dp"
-        tools:context="com.example.spencerroyds.buzz.LoginActivity"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:visibility="gone"
+        tools:context="com.example.spencerroyds.buzz.LoginActivity">
 
     </android.widget.RelativeLayout>
 
@@ -33,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
+
 
     <EditText
         android:id="@+id/txtPwd"
@@ -62,7 +78,6 @@
         android:background="@drawable/custom_button"
         android:elevation="20dp"
         android:fontFamily="sans-serif"
-        android:onClick="btnUserLogin_Click"
         android:shadowRadius="0"
         android:text="Login"
         android:textColor="@android:color/background_light" />
@@ -76,7 +91,7 @@
         android:background="@drawable/custom_button"
         android:elevation="20dp"
         android:fontFamily="sans-serif"
-        android:onClick="btnRegistrationUser_Click"
+
         android:text="Register"
         android:textColor="@android:color/background_light" />
 
@@ -111,7 +126,7 @@
         android:layout_marginBottom="20dp"
         android:text="or"
         android:textColor="@android:color/background_light"
-        android:translationY="-10dp" />
+        android:translationY="-20dp" />
 
     <Button
         android:id="@+id/googleSignInButton"
@@ -119,7 +134,7 @@
         android:layout_height="35dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="70dp"
         android:height="20dp"
         android:background="@drawable/custom_button"
         android:backgroundTint="@android:color/white"
@@ -128,15 +143,80 @@
         android:paddingRight="25dp"
         android:text="Sign In"
         android:textAlignment="center"
-        android:translationY="0dp" />
+        android:translationY="-15dp" />
+
+    <ImageView
+        android:id="@+id/bb"
+        android:layout_width="250dp"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="35dp"
+        android:height="20dp"
+        android:background="@drawable/custom_button"
+        android:backgroundTint="#8a23ac"
+        android:visibility="visible" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/buttonFacebookLogin"
+        android:layout_width="235dp"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="35dp"
+        android:backgroundTint="#8a23ac"
+        android:translationY="-5dp"/>
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="175dp"
-        android:layout_height="175dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_above="@+id/txtEmailLogin"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        app:srcCompat="@drawable/web_hi_res_512_no_back" />
+        android:layout_marginBottom="26dp"
+        app:srcCompat="@drawable/playstore_icon" />
+
+    <ImageView
+        android:id="@+id/circle_outline"
+        android:layout_width="170dp"
+        android:layout_height="110dp"
+        android:layout_above="@+id/txtEmailLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="47dp"
+        android:visibility="visible"
+        app:srcCompat="@drawable/circle_outline" />
+
+    <View
+        android:id="@+id/outline1"
+        android:layout_width="200dp"
+        android:layout_height="7dp"
+        android:layout_above="@+id/txtEmailLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="100sp"
+
+        android:layout_marginBottom="26dp"
+        android:background="#b294c9"
+        android:visibility="invisible" />
+
+    <View
+        android:id="@+id/outline2"
+        android:layout_width="200dp"
+        android:layout_height="8dp"
+        android:layout_above="@id/loginBTN"
+        android:layout_alignStart="@+id/outline1"
+        android:layout_alignEnd="@+id/txtPwd"
+        android:layout_gravity="center"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="34dp"
+        android:background="#b294c9"
+        android:visibility="invisible" />
+
+
 
 </RelativeLayout>
