@@ -28,6 +28,9 @@
         android:theme="@style/AppTheme"
         android:title="Buzz">
 
+        <provider android:authorities="com.facebook.app.FacebookContentProvider{302510430542831}"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

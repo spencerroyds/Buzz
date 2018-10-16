@@ -4,7 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -21,6 +23,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -62,6 +65,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import static android.Manifest.permission.READ_CONTACTS;
@@ -91,15 +96,16 @@ public class LoginActivity extends AppCompatActivity{
     public Button mGoogleButton;
 
     private VideoView mVideoView;
+    PackageInfo info;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         LoginButton loginButton = findViewById(R.id.buttonFacebookLogin);
-       // mVideoView = (VideoView) findViewById(R.id.bgVideoView);
+        mVideoView = (VideoView) findViewById(R.id.bgVideoView);
 
-       /* Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.coffeecup_trim);
+        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.coffee);
 
         mVideoView.setVideoURI(uri);
         mVideoView.start();
@@ -110,7 +116,7 @@ public class LoginActivity extends AppCompatActivity{
                 mediaPlayer.setLooping(true);
             }
         });
-*/
+
 
         loginButton.setReadPermissions("email", "public_profile");
         callbackManager = CallbackManager.Factory.create();
@@ -136,6 +142,23 @@ public class LoginActivity extends AppCompatActivity{
                 });
 
 
+        try {
+            info = getPackageManager().getPackageInfo("com.example.spencerroyds.buzz", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String something = new String(Base64.encode(md.digest(), 0));
+                //String something = new String(Base64.encodeBytes(md.digest()));
+                Log.e("hash key", something);
+            }
+        } catch (PackageManager.NameNotFoundException e1) {
+            Log.e("name not found", e1.toString());
+        } catch (NoSuchAlgorithmException e) {
+            Log.e("no such an algorithm", e.toString());
+        } catch (Exception e) {
+            Log.e("exception", e.toString());
+        }
 
         ///////////////////////
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
