@@ -14,50 +14,71 @@
         <LinearLayout
             android:layout_width="175dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:orientation="vertical"
-            android:paddingRight="10dp"
-            android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/linearLayout2"
-            android:layout_marginStart="31dp">
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|center"
+            android:layout_marginStart="31dp"
+            android:orientation="vertical"
+            android:paddingEnd="10dp">
 
             <TextView
                 android:id="@+id/popupOK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="center"
                 android:lines="1"
-                android:text="OK"
+                android:text="ADD"
                 android:textColor="#b52ee2"
-                android:textSize="17dp"
-                android:textStyle="bold"/>
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|end"
+            android:layout_marginStart="31dp"
+            android:orientation="vertical"
+            android:translationX="22dp">
+
+            <TextView
+                android:id="@+id/popupShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:lines="1"
+                android:text="Share"
+                android:textColor="#b52ee2"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="175dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/popupCANCEL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:lines="1"
                 android:text="CANCEL"
                 android:textColor="#b52ee2"
-                android:textSize="17dp"
-                android:textStyle="bold"/>
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout2"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="28dp"
@@ -67,11 +88,11 @@
                 android:id="@+id/popupMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:lines="1"
-                android:text="Add to favorites?"
+                android:text="Add To Favorites/Share?"
                 android:textColor="#FFFFFF"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
