@@ -35,7 +35,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareContent;
 import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -131,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public static ArrayList<String>RatingList;
     public static ArrayList<String>PriceList;
 
-    String search = "";
     //////////////////////////////FAVORITES DATA
     ArrayList<Float> _alpha;
     ArrayList<Float> _anchorU;
@@ -154,6 +159,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     Dialog myDialog;
     boolean listLong;
     int nearbyListIndex;
+
+    ShareDialog facebookShareDialog;
+    CallbackManager callbackManager;
+
+    String search;
+    String shareName;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -235,6 +246,24 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         listLong = false;
         nearbyListIndex = 0;
 
+        facebookShareDialog = new ShareDialog(this);
+        callbackManager = CallbackManager.Factory.create();
+        facebookShareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+            @Override
+            public void onSuccess(Sharer.Result result) {
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+
+            }
+        });
 
         nearbyListView = (ListView) findViewById(R.id.nearbyView);
         nearbyListView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
@@ -475,9 +504,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         nearbyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                search = TitleList.get(i).toString() + " " + VicinityList.get(i).toString();
+                String _search = TitleList.get(i).toString() + " " + VicinityList.get(i).toString();
+                setSearch(_search);
+                String _name = TitleList.get(i).toString();
+                setName(_name);
 
-                String strUri = "http://maps.google.com/maps?q=" + search;
+                String strUri = "http://maps.google.com/maps?q=" + TitleList.get(i).toString() + " " + VicinityList.get(i).toString();
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
 
                 intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
@@ -491,6 +523,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         nearbyListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String _search = TitleList.get(i).toString() + " " + VicinityList.get(i).toString();
+                setSearch(_search);
+                String _name = TitleList.get(i).toString();
+                setName(_name);
                 nearbyListIndex = i;
                 listLong = true;
                 ShowPopUp(null);
@@ -1024,27 +1060,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         TextView txtCANCEL;
         TextView txtSHARE;
         txtOK = (TextView) myDialog.findViewById(R.id.popupOK);
-        txtSHARE = (TextView) findViewById(R.id.popupShare);
+        txtSHARE = (TextView) myDialog.findViewById(R.id.popupShare);
 
-        txtSHARE.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myDialog.dismiss();
 
-                if(listLong)
-                {
-                    LatLng favLatLng = new LatLng(LatList.get(nearbyListIndex), LngList.get(nearbyListIndex));
-
-                    MarkerOptions options = new MarkerOptions().position(favLatLng).title((String)TitleList.get(nearbyListIndex)).snippet
-                            ((String) VicinityList.get(nearbyListIndex));
-                    favorites.add(options);
-                    mMap.clear();
-                    saveFavorites();
-                    listLong = false;
-                }
-
-            }
-        });
         txtOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1068,18 +1086,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View v) {
                 myDialog.dismiss();
-                int i;
-                if(listLong)
-                {
-                    LatLng shrlang = new LatLng(LatList.get(nearbyListIndex), LngList.get(nearbyListIndex));
-                    listLong = false;
+                String _search = getSearch();
+                String quote = "Check out this coffee shop, " + getName() + ", that I found using Buzz!";
 
-                    String strUri = "http://maps.google.com/maps?q=" + search;
-                    ShareLinkContent content = new ShareLinkContent.Builder()
-                            .setContentUrl(Uri.parse(strUri))
-                            .build();
-                }
+                String strUri = "http://maps.google.com/maps?q=" + _search;
+                ShareLinkContent content = new ShareLinkContent.Builder()
+                        .setContentUrl(Uri.parse(strUri))
+                        .setQuote(quote)
+                        .build();
 
+                facebookShareDialog.show(content, ShareDialog.Mode.WEB);
+
+                listLong = false;
             }
         });
 
@@ -1102,5 +1120,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     {
         favoritePopupOK = true;
     }
+
+    void setSearch(String _search) {search = _search;}
+
+    String getSearch() {return search;}
+
+    void setName(String _name) {shareName = _name;}
+
+    String getName() {return shareName;}
 
 }
