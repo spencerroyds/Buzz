@@ -35,6 +35,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.share.model.ShareLinkContent;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -79,6 +80,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.support.v4.app.FragmentActivity;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -128,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public static ArrayList<String>RatingList;
     public static ArrayList<String>PriceList;
 
+    String search = "";
     //////////////////////////////FAVORITES DATA
     ArrayList<Float> _alpha;
     ArrayList<Float> _anchorU;
@@ -230,6 +234,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         favoritePopupOK = false;
         listLong = false;
         nearbyListIndex = 0;
+
 
         nearbyListView = (ListView) findViewById(R.id.nearbyView);
         nearbyListView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
@@ -470,7 +475,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         nearbyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String search = TitleList.get(i).toString() + " " + VicinityList.get(i).toString();
+                search = TitleList.get(i).toString() + " " + VicinityList.get(i).toString();
 
                 String strUri = "http://maps.google.com/maps?q=" + search;
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
@@ -478,6 +483,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
 
                 startActivity(intent);
+
             }
         });
 
@@ -1016,8 +1022,29 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         myDialog.setContentView(R.layout.favorite_popup);
         TextView txtOK;
         TextView txtCANCEL;
-
+        TextView txtSHARE;
         txtOK = (TextView) myDialog.findViewById(R.id.popupOK);
+        txtSHARE = (TextView) findViewById(R.id.popupShare);
+
+        txtSHARE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+
+                if(listLong)
+                {
+                    LatLng favLatLng = new LatLng(LatList.get(nearbyListIndex), LngList.get(nearbyListIndex));
+
+                    MarkerOptions options = new MarkerOptions().position(favLatLng).title((String)TitleList.get(nearbyListIndex)).snippet
+                            ((String) VicinityList.get(nearbyListIndex));
+                    favorites.add(options);
+                    mMap.clear();
+                    saveFavorites();
+                    listLong = false;
+                }
+
+            }
+        });
         txtOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1037,6 +1064,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         });
+        txtSHARE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+                int i;
+                if(listLong)
+                {
+                    LatLng shrlang = new LatLng(LatList.get(nearbyListIndex), LngList.get(nearbyListIndex));
+                    listLong = false;
+
+                    String strUri = "http://maps.google.com/maps?q=" + search;
+                    ShareLinkContent content = new ShareLinkContent.Builder()
+                            .setContentUrl(Uri.parse(strUri))
+                            .build();
+                }
+
+            }
+        });
+
+
 
         txtCANCEL = (TextView) myDialog.findViewById(R.id.popupCANCEL);
         txtCANCEL.setOnClickListener(new View.OnClickListener() {

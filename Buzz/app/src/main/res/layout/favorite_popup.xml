@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:lines="1"
-                android:text="Share"
+                android:text="SHARE"
                 android:textColor="#b52ee2"
                 android:textSize="17sp"
                 android:textStyle="bold" />

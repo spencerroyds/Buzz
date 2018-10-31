@@ -128,16 +128,23 @@ public class LoginActivity extends AppCompatActivity{
                         handleFacebookAccessToken(loginResult.getAccessToken());
                         Intent i = new Intent(LoginActivity.this, Splash.class);
                         startActivity(i);
+                        Toast.makeText(LoginActivity.this, "User logged in successfully",
+                                Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onCancel() {
                         // App code
+                        Toast.makeText(LoginActivity.this, "User log in cancelled",
+                                Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
                         // App code
+                        Log.w(TAG, "Sign in Failed" + exception);
+                        Toast.makeText(LoginActivity.this, "User log in failed",
+                                Toast.LENGTH_LONG).show();
                     }
                 });
 
