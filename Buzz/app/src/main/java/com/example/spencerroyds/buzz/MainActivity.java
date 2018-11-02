@@ -1026,25 +1026,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         txtOK = (TextView) myDialog.findViewById(R.id.popupOK);
         txtSHARE = (TextView) findViewById(R.id.popupShare);
 
-        txtSHARE.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myDialog.dismiss();
-
-                if(listLong)
-                {
-                    LatLng favLatLng = new LatLng(LatList.get(nearbyListIndex), LngList.get(nearbyListIndex));
-
-                    MarkerOptions options = new MarkerOptions().position(favLatLng).title((String)TitleList.get(nearbyListIndex)).snippet
-                            ((String) VicinityList.get(nearbyListIndex));
-                    favorites.add(options);
-                    mMap.clear();
-                    saveFavorites();
-                    listLong = false;
-                }
-
-            }
-        });
         txtOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
