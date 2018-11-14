@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
@@ -121,6 +122,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i == 0)
                 {
+                    LoginManager.getInstance().logOut();
                     firebaseAuth1.getInstance().signOut();
                     Toast.makeText(SettingsActivity.this, "Signed Out",
                             Toast.LENGTH_SHORT).show();
