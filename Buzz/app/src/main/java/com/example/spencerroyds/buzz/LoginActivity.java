@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -111,7 +113,7 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.activity_login);
         LoginButton loginButton = findViewById(R.id.buttonFacebookLogin);
         mVideoView = (VideoView) findViewById(R.id.bgVideoView);
-
+        myDialog1 = new Dialog(this);
         frgtpwd = (TextView) findViewById(R.id.forgotPwd);
 
         Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.coffee);
@@ -477,6 +479,8 @@ public class LoginActivity extends AppCompatActivity{
 
 
         });
+
+        myDialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog1.show();
     }
 

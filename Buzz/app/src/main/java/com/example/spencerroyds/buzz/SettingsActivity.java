@@ -230,6 +230,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         });
+                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 myDialog.show();
     }
     public void ShowPopUp(View v, SharedPreferences.Editor editor)

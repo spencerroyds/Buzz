@@ -19,24 +19,25 @@
 
         <!-- Login progress -->
         <android.support.v7.widget.AppCompatImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/purplebackground"/>
+            android:layout_width="0dp"
+            android:layout_height="551dp"
+            android:src="@drawable/purplebackground"
+            tools:layout_editor_absoluteY="8dp"
+            tools:layout_editor_absoluteX="8dp" />
         <ProgressBar
             android:id="@+id/login_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="0dp" />
 
 
         <EditText
             android:id="@+id/txtPwd"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
             android:alpha="10"
             android:background="@drawable/edit_text"
             android:backgroundTint="@android:color/background_light"
@@ -50,15 +51,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtEmailLogin" />
+            app:layout_constraintTop_toBottomOf="@+id/txtEmailLogin"
+            tools:layout_editor_absoluteX="85dp" />
 
         <Button
             android:id="@+id/loginBTN"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_marginStart="8dp"
+            android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/custom_button"
             android:elevation="20dp"
@@ -71,14 +71,14 @@
             app:layout_constraintHorizontal_bias="0.74"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtPwd"
-            app:layout_constraintVertical_bias="0.493" />
+            app:layout_constraintVertical_bias="0.493"
+            tools:layout_editor_absoluteX="70dp" />
 
         <Button
             android:id="@+id/registerBTN"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
 
             android:background="@drawable/custom_button"
@@ -90,15 +90,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtPwd"
             app:layout_constraintVertical_bias="0.491"
-            app:layout_constraintStart_toEndOf="@id/loginBTN"/>
+            app:layout_constraintStart_toEndOf="@id/loginBTN"
+            tools:layout_editor_absoluteX="227dp" />
 
         <EditText
             android:id="@+id/txtEmailLogin"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="140dp"
-            android:layout_marginEnd="8dp"
             android:background="@drawable/edit_text"
             android:backgroundTint="@android:color/background_light"
             android:elegantTextHeight="false"
@@ -116,15 +115,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/circle_outline" />
+            app:layout_constraintTop_toBottomOf="@+id/circle_outline"
+            tools:layout_editor_absoluteX="85dp" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
             android:text="or"
             android:textColor="@android:color/background_light"
             android:translationY="-20dp"
@@ -133,12 +131,13 @@
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtPwd"
-            app:layout_constraintVertical_bias="0.675" />
+            app:layout_constraintVertical_bias="0.675"
+            tools:layout_editor_absoluteX="186dp" />
 
         <Button
             android:id="@+id/googleSignInButton"
             android:layout_width="250dp"
-            android:layout_height="35dp"
+            android:layout_height="48dp"
             android:layout_marginBottom="20dp"
             android:height="20dp"
             android:background="@drawable/custom_button"
@@ -151,14 +150,13 @@
             android:translationY="-15dp"
             app:layout_constraintBottom_toTopOf="@+id/buttonFacebookLogin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteX="67dp" />
 
         <ImageView
             android:id="@+id/bb"
             android:layout_width="250dp"
             android:layout_height="35dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="48dp"
             android:background="@drawable/custom_button"
             android:backgroundTint="#8a23ac"
@@ -166,54 +164,51 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteX="67dp" />
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/buttonFacebookLogin"
             android:layout_width="235dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_height="26dp"
             android:layout_marginBottom="56dp"
             android:backgroundTint="#8a23ac"
             android:translationY="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteX="75dp" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginStart="8dp"
             android:translationY="80dp"
             android:src="@drawable/playstore_icon"
             app:layout_constraintBottom_toBottomOf="@+id/circle_outline"
             app:layout_constraintStart_toStartOf="@+id/circle_outline"
-            app:layout_constraintTop_toTopOf="@+id/circle_outline" />
+            app:layout_constraintTop_toTopOf="@+id/circle_outline"
+            tools:layout_editor_absoluteX="115dp" />
 
         <ImageView
             android:id="@+id/circle_outline"
             android:layout_width="170dp"
             android:layout_height="110dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:src="@drawable/circle_outline"
             android:visibility="visible"
             android:translationY="80dp"
             app:layout_constraintBottom_toTopOf="@+id/txtEmailLogin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_chainStyle="spread_inside" />
+            app:layout_constraintVertical_chainStyle="spread_inside"
+            tools:layout_editor_absoluteX="107dp" />
 
     <TextView
         android:id="@+id/forgotPwd"
         android:layout_width="wrap_content"
         android:layout_height="17dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
 
 
         android:layout_marginBottom="8dp"
@@ -221,7 +216,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonFacebookLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonFacebookLogin"
+        tools:layout_editor_absoluteX="136dp" />
 
 
 

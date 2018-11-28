@@ -630,6 +630,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         ImageButton btnFindNearMe = (ImageButton) findViewById(R.id.btnFindNearMe);
         btnFindNearMe.setFocusable(false);
 
+        ImageButton btnSearch = (ImageButton) findViewById(R.id.btnSeachName);
+        btnSearch.setFocusable(false);
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    startActivityForResult(builder.build(MainActivity.this), PLACE_PICKER_REQUEST);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
         btnFindNearMe.setOnClickListener(new View.OnClickListener() {
             String cafe = "cafe";
             @Override
@@ -1111,8 +1128,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     //       }
     //   });
 
-    //   myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-    //   myDialog.show();
+    myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    myDialog.show();
 
     }
 
