@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="150dp"
+    android:layout_gravity="center"
+    android:background="@drawable/popup_background"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="30dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/emailReset"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="20dp"
+                android:alpha="10"
+                android:background="@drawable/edit_text"
+                android:backgroundTint="@android:color/background_light"
+                android:ems="10"
+                android:hint="  Email"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:textColor="#eed0f9"
+                android:textColorLink="@android:color/black"
+                android:translationY="-20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+           >
+
+            <Button
+                android:id="@+id/sendBTN"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+
+                android:background="@drawable/custom_button"
+                android:elevation="20dp"
+                android:fontFamily="sans-serif"
+                android:shadowRadius="0"
+                android:text="send"
+
+                android:textColor="@android:color/background_light" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:translationY="-20dp">
+
+            <TextView
+                android:id="@+id/popupMessage01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:lines="1"
+                android:text="A link to reset your password"
+                android:textColor="#eed0f9"
+                android:textSize="15sp"
+                />
+
+
+        </LinearLayout>
+        <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:translationY="-20dp">
+
+        <TextView
+            android:id="@+id/popupMessage2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:lines="1"
+            android:text="will be sent to your email"
+            android:textColor="#eed0f9"
+            android:textSize="15sp" />
+
+
+    </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>
