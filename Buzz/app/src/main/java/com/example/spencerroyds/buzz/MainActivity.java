@@ -1103,16 +1103,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
 
-        txtCANCEL = (TextView) myDialog.findViewById(R.id.popupCANCEL);
-        txtCANCEL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myDialog.dismiss();
-            }
-        });
+    //   txtCANCEL = (TextView) myDialog.findViewById(R.id.popupCANCEL);
+    //   txtCANCEL.setOnClickListener(new View.OnClickListener() {
+    //       @Override
+    //       public void onClick(View v) {
+    //           myDialog.dismiss();
+    //       }
+    //   });
 
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
+    //   myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    //   myDialog.show();
 
     }
 

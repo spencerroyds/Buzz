@@ -3,6 +3,7 @@ package com.example.spencerroyds.buzz;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -54,6 +55,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -98,12 +101,18 @@ public class LoginActivity extends AppCompatActivity{
     private VideoView mVideoView;
     PackageInfo info;
 
+    Dialog myDialog1;
+    public TextView frgtpwd;
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         LoginButton loginButton = findViewById(R.id.buttonFacebookLogin);
         mVideoView = (VideoView) findViewById(R.id.bgVideoView);
+
+        frgtpwd = (TextView) findViewById(R.id.forgotPwd);
 
         Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.coffee);
 
@@ -254,6 +263,17 @@ public class LoginActivity extends AppCompatActivity{
                 }
             }
         });
+
+        frgtpwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               ShowPopUp1(null);
+
+            }
+
+
+        });
+
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -414,6 +434,50 @@ public class LoginActivity extends AppCompatActivity{
     {
         Intent nextpage = new Intent(LoginActivity.this, Splash.class);
         startActivity(nextpage);
+    }
+
+    public void ShowPopUp1(View v) {
+
+        myDialog1.setContentView(R.layout.resetpwd_popup);
+        TextView txt1;
+        TextView txt2;
+        TextView txt3;
+        final EditText emailreset;
+        Button sendBtn;
+        txt1 = (TextView) myDialog1.findViewById(R.id.popupMessage01);
+        txt2 = (TextView) myDialog1.findViewById(R.id.popupMessage2);
+        emailreset = (EditText) myDialog1.findViewById(R.id.emailReset);
+        sendBtn = (Button) myDialog1.findViewById(R.id.sendBTN);
+
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String userEmailreset = emailreset.getText().toString();
+
+                if (TextUtils.isEmpty(userEmailreset))
+                {
+                    Toast.makeText(LoginActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    firebaseAuth.sendPasswordResetEmail(userEmailreset).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful())
+                            {
+                                Toast.makeText(LoginActivity.this, "Email has been sent", Toast.LENGTH_LONG).show();
+                                myDialog1.dismiss();
+                            }
+                        }
+                    });
+                }
+
+            }
+
+
+        });
+        myDialog1.show();
     }
 
 }

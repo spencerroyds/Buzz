@@ -44,7 +44,7 @@
             android:hint="  Password"
             android:inputType="textPassword"
             android:paddingLeft="10dp"
-            android:textColor="@android:color/background_light"
+            android:textColor="#eed0f9"
             android:textColorLink="@android:color/black"
             android:translationY="-20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -206,6 +206,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <TextView
+        android:id="@+id/forgotPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+
+
+        android:layout_marginBottom="8dp"
+        android:text="Forgot Password?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonFacebookLogin" />
 
 
 

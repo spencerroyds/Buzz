@@ -25,10 +25,10 @@
                 android:id="@+id/popupOK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="start"
                 android:lines="1"
                 android:text="ADD"
-                android:textColor="#b52ee2"
+                android:textColor="#eed0f9"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -40,7 +40,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginStart="31dp"
             android:orientation="vertical"
-            android:translationX="22dp">
+           >
 
             <TextView
                 android:id="@+id/popupShare"
@@ -49,27 +49,7 @@
                 android:layout_gravity="end"
                 android:lines="1"
                 android:text="SHARE"
-                android:textColor="#b52ee2"
-                android:textSize="17sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/popupCANCEL"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:lines="1"
-                android:text="CANCEL"
-                android:textColor="#b52ee2"
+                android:textColor="#eed0f9"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 

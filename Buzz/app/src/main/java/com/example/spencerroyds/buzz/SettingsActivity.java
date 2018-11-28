@@ -11,12 +11,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,6 +29,10 @@ import com.facebook.login.LoginManager;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -83,6 +90,9 @@ public class SettingsActivity extends AppCompatActivity {
         mySettingsList = new ArrayList<String>();
         mySettingsList.add("Log Out");
         mySettingsList.add("Map Themes");
+        mySettingsList.add("Change Password");
+        mySettingsList.add("Report a Problem");
+        mySettingsList.add("About us");
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -138,6 +148,27 @@ public class SettingsActivity extends AppCompatActivity {
                     ShowPopUp(null, mEditor);
 
                 }
+                else if (i == 2)
+                {
+                    ShowPopUp1(null);
+                }
+                else if (i == 3)
+                {
+                    Intent k = new Intent(Intent.ACTION_SEND);
+                    k.setType("message/rfc822");
+                    k.putExtra(Intent.EXTRA_EMAIL  , new String[]{"buzz.coffee.app@gmail.com"});
+                    k.putExtra(Intent.EXTRA_SUBJECT, "Subject of issue: ");
+                    k.putExtra(Intent.EXTRA_TEXT   , "Describe the issue: ");
+                    try {
+                        startActivity(Intent.createChooser(k, "Send mail..."));
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        Toast.makeText(SettingsActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else if (i ==4 )
+                {
+                    ShowPopUp2(null);
+                }
 
            }
         });
@@ -154,7 +185,53 @@ public class SettingsActivity extends AppCompatActivity {
             super.onBackPressed();
 
     }
+    public void ShowPopUp2(View V)
+    {
 
+    }
+    public void ShowPopUp1(View v) {
+
+        myDialog.setContentView(R.layout.resetpwd_popup);
+        TextView txt1;
+        TextView txt2;
+        TextView txt3;
+        final EditText emailreset;
+        Button sendBtn;
+        txt1 = (TextView) myDialog.findViewById(R.id.popupMessage01);
+        txt2 = (TextView) myDialog.findViewById(R.id.popupMessage2);
+        emailreset = (EditText) myDialog.findViewById(R.id.emailReset);
+        sendBtn = (Button) myDialog.findViewById(R.id.sendBTN);
+
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String userEmailreset = emailreset.getText().toString();
+
+                if (TextUtils.isEmpty(userEmailreset))
+                {
+                    Toast.makeText(SettingsActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    firebaseAuth1.sendPasswordResetEmail(userEmailreset).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful())
+                            {
+                                Toast.makeText(SettingsActivity.this, "Email has been sent", Toast.LENGTH_LONG).show();
+                                myDialog.dismiss();
+                            }
+                        }
+                    });
+                }
+
+            }
+
+
+        });
+                myDialog.show();
+    }
     public void ShowPopUp(View v, SharedPreferences.Editor editor)
     {
         final SharedPreferences.Editor mEditor = editor;
