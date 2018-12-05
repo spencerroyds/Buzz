@@ -33,7 +33,7 @@ public class MessagingActivity extends AppCompatActivity implements RoomListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_messaging);
         // This is where we write the mesage
         editText = (EditText) findViewById(R.id.editText);
         messageAdapter = new MessageAdapter(this);
