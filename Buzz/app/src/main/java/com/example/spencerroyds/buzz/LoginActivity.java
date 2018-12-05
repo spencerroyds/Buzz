@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity{
 
     Dialog myDialog1;
     public TextView frgtpwd;
-    boolean popupshowed = false;
+
 
 
 
@@ -296,7 +296,7 @@ public class LoginActivity extends AppCompatActivity{
                                         String userId = user.getUid();
                                         Toast.makeText(LoginActivity.this, "Registration Successful",
                                                 Toast.LENGTH_SHORT).show();
-                                       // ShowPopUpAccountInfo(null);
+
 
                                     }
                                     else {
@@ -368,7 +368,6 @@ public class LoginActivity extends AppCompatActivity{
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = firebaseAuth.getCurrentUser();
-                           // ShowPopUpAccountInfo(null);
                             Intent i = new Intent(LoginActivity.this, Splash.class);
                             startActivity(i);
                             Toast.makeText(LoginActivity.this, "User logged in successfully",
@@ -489,47 +488,7 @@ public class LoginActivity extends AppCompatActivity{
         myDialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog1.show();
     }
-    public void ShowPopUpAccountInfo(View V) {
-        String _email = user.getEmail();
-        String[] parts = _email.split("@");
-        _email = parts[0];
-        myDialog1.setContentView(R.layout.accountinfo_popup);
-        final EditText username = (EditText) myDialog1.findViewById(R.id.actUsername);
-        final RadioButton female = (RadioButton) myDialog1.findViewById(R.id.radioButtonFem);
-        final RadioButton male = (RadioButton) myDialog1.findViewById(R.id.radioButtonMale);
-        final EditText age = (EditText) myDialog1.findViewById(R.id.actUsername);
-        final Button save = (Button) myDialog1.findViewById(R.id.saveBTN);
-                if (username.getText().toString() == "" || age.getText().toString() == "")
-                {
-                    save.setEnabled(false);
-                }
-                if (female.isChecked() == false & male.isChecked() == false)
-                {
-                    save.setEnabled(false);
-                }
 
-        save.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                String email = user.getEmail();
-                String[] parts = email.split("@");
-                email = parts[0];
-                databaseReference.child("users").child(email).child("Username").setValue(username.getText().toString());
-                databaseReference.child("users").child(email).child("Age").setValue(age.getText());
-                if (female.isChecked())
-                {
-                    databaseReference.child("users").child(email).child("Gender").setValue("Female");
-                }
-                else if (male.isChecked())
-                {
-                    databaseReference.child("users").child(email).child("Gender").setValue("Male");
-                }
-                popupshowed = true;
-            }
-        });
-        myDialog1.show();
-    }
 
 }
 
