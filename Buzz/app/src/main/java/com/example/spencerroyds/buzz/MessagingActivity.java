@@ -9,6 +9,13 @@ import android.widget.ListView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.scaledrone.lib.Listener;
 import com.scaledrone.lib.Member;
 import com.scaledrone.lib.Room;
@@ -29,6 +36,11 @@ public class MessagingActivity extends AppCompatActivity implements RoomListener
     private Scaledrone scaledrone;
     private MessageAdapter messageAdapter;
     private ListView messagesView;
+    FirebaseAuth firebaseAuth;
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+    String username = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +51,46 @@ public class MessagingActivity extends AppCompatActivity implements RoomListener
         messageAdapter = new MessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.messages_view);
         messagesView.setAdapter(messageAdapter);
+        firebaseAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        MemberData data = new MemberData(getRandomName(), getRandomColor());
+        String _email = user.getEmail();
+        String[] parts = _email.split("@");
+        _email = parts[0];
+
+        databaseReference.child("users").child(_email).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated
+
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+
+                for (DataSnapshot child: children) {
+                    String email = user.getEmail();
+                    String[] parts = email.split("@");
+                    email = parts[0];
+
+                    if (child.getKey().toString().contains("Username"))
+                    {
+                        username = child.getValue().toString();
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+
+            }
+        });
+
+
+        MemberData data = new MemberData(username, getRandomColor());
 
         scaledrone = new Scaledrone(channelID, data);
         scaledrone.connect(new Listener() {

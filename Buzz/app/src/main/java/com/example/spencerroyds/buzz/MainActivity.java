@@ -936,11 +936,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         _email = parts[0];
 
         myDialog.setContentView(R.layout.accountinfo_popup);
-        final EditText username = (EditText) myDialog.findViewById(R.id.actUsername);
         final RadioButton female = (RadioButton) myDialog.findViewById(R.id.radioButtonFem);
         final RadioButton male = (RadioButton) myDialog.findViewById(R.id.radioButtonMale);
         final EditText age = (EditText) myDialog.findViewById(R.id.actAge);
         final Button save = (Button) myDialog.findViewById(R.id.saveBTN);
+        final EditText username = (EditText) myDialog.findViewById(R.id.actUsername);
 
 
         save.setOnClickListener(new View.OnClickListener() {
