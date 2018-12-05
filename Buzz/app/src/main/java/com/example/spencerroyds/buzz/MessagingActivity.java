@@ -1,5 +1,7 @@
 package com.example.spencerroyds.buzz;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -39,6 +41,7 @@ public class MessagingActivity extends AppCompatActivity implements RoomListener
     FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
+    public static SharedPreferences mSharedPreferences;
     String username = "";
 
 
@@ -55,41 +58,13 @@ public class MessagingActivity extends AppCompatActivity implements RoomListener
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
         final FirebaseUser user = firebaseAuth.getCurrentUser();
+        mSharedPreferences = getSharedPreferences("USERNAME", Context.MODE_PRIVATE);
 
         String _email = user.getEmail();
         String[] parts = _email.split("@");
         _email = parts[0];
 
-        databaseReference.child("users").child(_email).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated
-
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-
-                for (DataSnapshot child: children) {
-                    String email = user.getEmail();
-                    String[] parts = email.split("@");
-                    email = parts[0];
-
-                    if (child.getKey().toString().contains("Username"))
-                    {
-                        username = child.getValue().toString();
-                    }
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-
-            }
-        });
-
-
+        username = mSharedPreferences.getString("USERNAME", "User");
         MemberData data = new MemberData(username, getRandomColor());
 
         scaledrone = new Scaledrone(channelID, data);
@@ -182,5 +157,6 @@ public class MessagingActivity extends AppCompatActivity implements RoomListener
             editText.getText().clear();
         }
     }
+
 
 }

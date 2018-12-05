@@ -173,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     String search;
     String shareName;
+    public static SharedPreferences mSharedPreferences1;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -199,7 +200,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
+        mSharedPreferences1 = getSharedPreferences("USERNAME", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor mEditor = mSharedPreferences1.edit();
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
@@ -333,7 +335,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     else
                     {
 
-                        ShowPopUpAccountInfo(null);
+                        ShowPopUpAccountInfo(null, mEditor);
 
 
                     }
@@ -929,11 +931,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         databaseReference.child("users").child(email).child("Favorites").setValue(favorites);
     }
 
-    public void ShowPopUpAccountInfo(View V) {
+    public void ShowPopUpAccountInfo(View V, SharedPreferences.Editor editor) {
         final  FirebaseUser user = firebaseAuth.getCurrentUser();
         String _email = user.getEmail();
         String[] parts = _email.split("@");
         _email = parts[0];
+
+        final SharedPreferences.Editor mEditor = editor;
 
         myDialog.setContentView(R.layout.accountinfo_popup);
         final RadioButton female = (RadioButton) myDialog.findViewById(R.id.radioButtonFem);
@@ -955,7 +959,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             Toast.makeText(MainActivity.this,"Must fill out everything", Toast.LENGTH_LONG).show();
         }
         else
+
                 databaseReference.child("users").child(email).child("Username").setValue(username.getText().toString());
+                mEditor.clear();
+                mEditor.apply();
+                mEditor.putString("USERNAME", username.getText().toString());
+                mEditor.apply();
                 databaseReference.child("users").child(email).child("Age").setValue(age.getText().toString());
 
         if (female.isChecked() == false & male.isChecked() == false)
