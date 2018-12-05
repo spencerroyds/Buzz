@@ -175,13 +175,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 case R.id.navigation_home:
                     return true;
                 case R.id.navigation_favorites:
-                    try {
-                        startActivityForResult(builder.build(MainActivity.this), PLACE_PICKER_REQUEST);
-                    } catch (GooglePlayServicesRepairableException e) {
-                        e.printStackTrace();
-                    } catch (GooglePlayServicesNotAvailableException e) {
-                        e.printStackTrace();
-                    }
+                    Intent j = new Intent(MainActivity.this, MessagingActivity.class);
+                    startActivity(j);
                     return true;
                 case R.id.navigation_settings:
                     Intent i = new Intent(MainActivity.this, SettingsActivity.class);
