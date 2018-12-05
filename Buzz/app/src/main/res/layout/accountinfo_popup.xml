@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="280dp"
+    android:layout_gravity="center"
+    android:background="@drawable/popup_background"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Account Information"
+        android:textColor="#eed0f9"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:paddingTop="10dp"
+        android:textSize="15dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username:"
+        android:textColor="#eed0f9"
+        android:paddingTop="10dp"
+        />
+    <EditText
+        android:id="@+id/actUsername"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:alpha="10"
+        android:background="@drawable/edit_text"
+        android:backgroundTint="@android:color/background_light"
+        android:textColor="#eed0f9"
+        android:textColorLink="@android:color/black"
+        android:paddingLeft="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender:"
+        android:textColor="#eed0f9"
+        android:paddingTop="10dp"
+        />
+
+    <RadioButton
+        android:id="@+id/radioButtonFem"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="Female"
+        android:textSize="12sp"
+        android:textColor="#eed0f9"
+
+        />
+
+    <RadioButton
+        android:id="@+id/radioButtonMale"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="Male"
+        android:textColor="#eed0f9"
+        android:textSize="12sp"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Age:"
+        android:textColor="#eed0f9"
+        android:paddingTop="10dp"
+        />
+    <EditText
+        android:id="@+id/actAge"
+        android:layout_width="50dp"
+        android:layout_height="25dp"
+        android:alpha="10"
+        android:background="@drawable/edit_text"
+        android:backgroundTint="@android:color/background_light"
+        android:textColor="#eed0f9"
+        android:textColorLink="@android:color/black"
+        android:paddingLeft="10dp"
+        android:inputType="number"
+        />
+    <Button
+        android:id="@+id/saveBTN"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="sans-serif"
+        android:text="Save"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/background_light" />
+
+
+</LinearLayout>

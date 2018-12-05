@@ -29,9 +29,11 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +48,7 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceDetectionClient;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -95,6 +98,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Handler;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnInfoWindowClickListener, GoogleMap.OnInfoWindowCloseListener, GoogleApiClient.ConnectionCallbacks,
@@ -122,6 +128,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
     ArrayList<MarkerOptions> favorites;
+    Location savloc;
+    LatLng latLng;
 
     ArrayList<String> arrayList;
     public static ArrayAdapter<String> adapter;
@@ -191,6 +199,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
+
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
@@ -241,6 +251,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         listLong = false;
         nearbyListIndex = 0;
 
+
+
+
+
         facebookShareDialog = new ShareDialog(this);
         callbackManager = CallbackManager.Factory.create();
         facebookShareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
@@ -259,6 +273,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         });
+
+
 
         nearbyListView = (ListView) findViewById(R.id.nearbyView);
         nearbyListView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
@@ -297,6 +313,42 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         String _email = user.getEmail();
         String[] parts = _email.split("@");
         _email = parts[0];
+
+        databaseReference.child("users").child(_email).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated
+
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+
+                for (DataSnapshot child: children) {
+                    String email = user.getEmail();
+                    String[] parts = email.split("@");
+                    email = parts[0];
+                    if (child.getKey().toString().contains("Age"))
+                    {
+                        break;
+                    }
+                    else
+                    {
+
+                        ShowPopUpAccountInfo(null);
+
+
+                    }
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+
+            }
+        });
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -530,7 +582,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
 
 
+
     }
+
 
     private boolean CheckGooglePlayServices() {
         GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
@@ -875,6 +929,103 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         databaseReference.child("users").child(email).child("Favorites").setValue(favorites);
     }
 
+    public void ShowPopUpAccountInfo(View V) {
+        final  FirebaseUser user = firebaseAuth.getCurrentUser();
+        String _email = user.getEmail();
+        String[] parts = _email.split("@");
+        _email = parts[0];
+
+        myDialog.setContentView(R.layout.accountinfo_popup);
+        final EditText username = (EditText) myDialog.findViewById(R.id.actUsername);
+        final RadioButton female = (RadioButton) myDialog.findViewById(R.id.radioButtonFem);
+        final RadioButton male = (RadioButton) myDialog.findViewById(R.id.radioButtonMale);
+        final EditText age = (EditText) myDialog.findViewById(R.id.actAge);
+        final Button save = (Button) myDialog.findViewById(R.id.saveBTN);
+
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                String email = user.getEmail();
+                String[] parts = email.split("@");
+                email = parts[0];
+        if (username.getText().toString() == "" || age.getText().toString() == "")
+        {
+            Toast.makeText(MainActivity.this,"Must fill out everything", Toast.LENGTH_LONG).show();
+        }
+        else
+                databaseReference.child("users").child(email).child("Username").setValue(username.getText().toString());
+                databaseReference.child("users").child(email).child("Age").setValue(age.getText().toString());
+
+        if (female.isChecked() == false & male.isChecked() == false)
+        {
+            Toast.makeText(MainActivity.this,"Must fill out everything", Toast.LENGTH_LONG).show();
+
+        }
+                if (female.isChecked())
+                {
+                    databaseReference.child("users").child(email).child("Gender").setValue("Female");
+
+                }
+                else if (male.isChecked())
+                {
+                    databaseReference.child("users").child(email).child("Gender").setValue("Male");
+
+                }
+                myDialog.dismiss();
+            }
+        });
+        myDialog.dismiss();
+    //  databaseReference.child("users").child(_email).addValueEventListener(new ValueEventListener() {
+    //      @Override
+    //      public void onDataChange(DataSnapshot dataSnapshot) {
+    //          // This method is called once with the initial value and again
+    //          // whenever data at this location is updated
+
+    //          Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+
+    //          for (DataSnapshot child: children) {
+    //              String email = user.getEmail();
+    //              String[] parts = email.split("@");
+    //              email = parts[0];
+    //              if (child.getValue().toString().contains("Age"))
+    //              {
+    //                  myDialog.dismiss();
+    //              }
+    //              else
+    //              {
+    //                  myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    //                  myDialog.show();
+
+
+    //              }
+
+    //          }
+
+
+    //      }
+
+    //      @Override
+    //      public void onCancelled(DatabaseError error) {
+    //          // Failed to read value
+
+    //      }
+    //  });
+
+
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+
+    }
+    private void savelatlng(LatLng latLng)
+    {
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        String email = user.getEmail();
+        String[] parts = email.split("@");
+        email = parts[0];
+        databaseReference.child("users").child(email).child("Location").setValue(latLng);
+    }
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -922,11 +1073,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
         }
-
+       //saveCurrentLocation(mLastLocation);
         //Place current location marker
         latitude = location.getLatitude();
         longitude = location.getLongitude();
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        //savelatlng(latLng);
+        Timer timer = new Timer ();
+        TimerTask hourlyTask = new TimerTask () {
+            @Override
+            public void run () {
+                savelatlng(latLng);
+            }
+        };
+
+        timer.schedule (hourlyTask, 0l, 1000*1*60);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Current Position");
@@ -947,6 +1108,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.d("onLocationChanged", "Exit");
 
     }
+
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {

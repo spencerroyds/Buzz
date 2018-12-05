@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,10 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -53,6 +59,9 @@ public class SettingsActivity extends AppCompatActivity {
     boolean theme_chosen = false;
     int theme_choice = 0;
     Dialog myDialog;
+    DatabaseReference databaseReference;
+
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -93,6 +102,7 @@ public class SettingsActivity extends AppCompatActivity {
         mySettingsList.add("Change Password");
         mySettingsList.add("Report a Problem");
         mySettingsList.add("About us");
+        mySettingsList.add("Account Info");
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -169,6 +179,11 @@ public class SettingsActivity extends AppCompatActivity {
                 {
                     ShowPopUp2(null);
                 }
+                else if (i == 5)
+                {
+                    ShowPopUp3(null);
+
+                }
 
            }
         });
@@ -184,6 +199,62 @@ public class SettingsActivity extends AppCompatActivity {
         else
             super.onBackPressed();
 
+    }
+    public void ShowPopUp3(View V)
+    {
+        String _email = user.getEmail();
+        String[] parts = _email.split("@");
+        _email = parts[0];
+        myDialog.setContentView(R.layout.accountinfo_popup);
+        final EditText username = (EditText) myDialog.findViewById(R.id.actUsername);
+        RadioButton female = (RadioButton) myDialog.findViewById(R.id.radioButtonFem);
+        RadioButton male = (RadioButton) myDialog.findViewById(R.id.radioButtonMale);
+        EditText age = (EditText) myDialog.findViewById(R.id.actUsername);
+        Button save = (Button) myDialog.findViewById(R.id.saveBTN);
+
+        databaseReference.child("users").child(_email).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated
+
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+
+                for (DataSnapshot child: children) {
+                    String email = user.getEmail();
+                    String[] parts = email.split("@");
+                    email = parts[0];
+                    if (child.getValue().toString().contains("Username"))
+                    {
+                        username.setText(child.getValue().toString());
+                    }
+                    else
+                    {
+                        if (username.getText().toString() != "")
+                        {
+
+                        databaseReference.child("users").child(email).child("Username").setValue(username.getText().toString());
+                        }
+                        else
+                        {
+                            username.setText("");
+                        }
+
+                    }
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+
+            }
+        });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
     public void ShowPopUp2(View V)
     {
