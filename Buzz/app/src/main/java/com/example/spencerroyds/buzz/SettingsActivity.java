@@ -74,13 +74,8 @@ public class SettingsActivity extends AppCompatActivity {
                     startActivity(j);
                     return true;
                 case R.id.navigation_favorites:
-                    try {
-                        startActivityForResult(builder.build(SettingsActivity.this), PLACE_PICKER_REQUEST);
-                    } catch (GooglePlayServicesRepairableException e) {
-                        e.printStackTrace();
-                    } catch (GooglePlayServicesNotAvailableException e) {
-                        e.printStackTrace();
-                    }
+                    Intent i = new Intent(SettingsActivity.this, MessagingActivity.class);
+                    startActivity(i);
                     return true;
                 case R.id.navigation_settings:
                     return true;
