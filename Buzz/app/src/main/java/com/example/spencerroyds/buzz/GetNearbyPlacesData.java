@@ -127,7 +127,7 @@ public class GetNearbyPlacesData extends AsyncTask <Object, String, String>{
             markerOptions.title(placeName);
 
             markerOptions.snippet(vicinity);
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
             mMap.addMarker(markerOptions);
             //move map camera
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));

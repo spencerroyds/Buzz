@@ -1,9 +1,13 @@
 package com.example.spencerroyds.buzz;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -43,7 +47,30 @@ public class MessagingActivity extends AppCompatActivity implements RoomListener
     private DatabaseReference databaseReference;
     public static SharedPreferences mSharedPreferences;
     String username = "";
+    Room room;
 
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    Intent j = new Intent(MessagingActivity.this, MainActivity.class);
+                    startActivity(j);
+                    return true;
+                case R.id.navigation_favorites:
+                    return true;
+                case R.id.navigation_settings:
+                    Intent i = new Intent(MessagingActivity.this, SettingsActivity.class);
+                    startActivity(i);
+                    return true;
+            }
+            return false;
+        }
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +101,7 @@ public class MessagingActivity extends AppCompatActivity implements RoomListener
                 System.out.println("Scaledrone connection open");
                 // Since the MainActivity itself already implement RoomListener we can pass it as a target
                 scaledrone.subscribe(roomName, MessagingActivity.this);
+
             }
 
             @Override
@@ -91,6 +119,7 @@ public class MessagingActivity extends AppCompatActivity implements RoomListener
                 System.err.println(reason);
             }
         });
+
     }
 
     // Successfully connected to Scaledrone room

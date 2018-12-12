@@ -330,6 +330,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     email = parts[0];
                     if (child.getKey().toString().contains("Age"))
                     {
+
                         break;
                     }
                     else
