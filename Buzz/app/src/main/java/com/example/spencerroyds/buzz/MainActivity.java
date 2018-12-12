@@ -175,6 +175,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     String shareName;
     public static SharedPreferences mSharedPreferences1;
 
+    boolean ageExists;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -254,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         nearbyListIndex = 0;
 
 
-
+        ageExists = false;
 
 
         facebookShareDialog = new ShareDialog(this);
@@ -330,12 +332,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     email = parts[0];
                     if (child.getKey().toString().contains("Age"))
                     {
+                        ageExists = true;
                         break;
                     }
                     else
                     {
 
-                        ShowPopUpAccountInfo(null, mEditor);
+                        if(ageExists)
+                        {
+                            break;
+                        }
+                        else {
+                            ShowPopUpAccountInfo(null, mEditor);
+                                ageExists=true;
+                        }
 
 
                     }
